@@ -13,6 +13,8 @@ class RandomAgent(object):
     def act(self, observation, reward, done):
         return self.action_space.sample()
 
+render = True  # 画面表示したい場合は True, そうでない場合は False にしてください
+
 if __name__ == '__main__':
     # You can optionally set up the logger. Also fine to set the level
     # to logging.DEBUG or logging.WARN if you want to change the
@@ -26,8 +28,9 @@ if __name__ == '__main__':
     # directory, including one with existing data -- all monitor files
     # will be namespaced). You can also dump to a tempdir if you'd
     # like: tempfile.mkdtemp().
-    outdir = '/tmp/random-agent-results'
-    env = Monitor(env, directory=outdir, force=True)
+    if not render:
+        outdir = '/tmp/random-agent-results'
+        env = Monitor(env, directory=outdir, force=True)
 
     # This declaration must go *after* the monitor call, since the
     # monitor's seeding creates a new action_space instance with the
@@ -45,6 +48,8 @@ if __name__ == '__main__':
         while True:
             action = agent.act(ob, reward, done)
             ob, reward, done, _ = env.step(action)
+            if render:
+                env.render()
             if done:
                 break
             # Note there's no env.render() here. But the environment still can open window and
