@@ -10,9 +10,10 @@ tensorflow = "*"
 gym = "*"
 jupyterlab = "*"
 ipython = "*"
-ple = {editable = true,path = "./../workspace/PyGame-Learning-Environment"}
+ple = {editable = true, git = "https://github.com/ntasfi/PyGame-Learning-Environment.git"}
 pygame = "*"
 gym-ple = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"
